@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
+  "homepage": "https://github.com/chenyu-0721/vuehomework2-",
   "dependencies": {
     "axios": "^1.7.3",
     "bootstrap": "^5.3.3",
@@ -15,6 +17,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.2",
+    "gh-pages": "^6.1.1",
     "vite": "^5.4.0"
   }
 }

@@ -5,7 +5,7 @@
         <div class="card mt-5">
           <div class="card-body" v-if="!isLogin">
             <h3 class="card-title text-center">{{ isRegister ? '註冊' : '登入' }}</h3>
-            <form>
+            <form @submit.prevent="handleSubmit">
               <div class="mb-3">
                 <label for="account" class="form-label">帳號</label>
                 <input type="text" id="account" v-model="account" class="form-control" placeholder="輸入信箱" required>
@@ -30,7 +30,7 @@
           </div>
           <div class="card-body" v-else-if="!isCheckOut">
             <h3 class="card-title text-center">驗證</h3>
-            <form >
+            <form @submit.prevent="handleSubmit">
               <div class="mb-3">
                 <label for="account" class="form-label">Token</label>
                 <input type="text" id="account" v-model="token" class="form-control" required>
@@ -95,12 +95,10 @@ const url = 'https://todolist-api.hexschool.io';
 const account = ref('');
 const password = ref('');
 const nickname = ref('');
-const token = ref('')
-const newTodo = ref('');
 const isRegister = ref(false);
 const isLogin = ref(false);
 const isCheckOut = ref(false);
-const todoList = ref([])
+const token = ref('')
 
 const signUp = async () => {
   try {
@@ -166,10 +164,13 @@ const signOut = async () => {
     token.value = '';
     backToLogin()
   } catch (error) {
+    console.log(error);
+    
     alert('登出失敗: ' + error.message); 
   }
 };
 
+const todoList = ref([])
 
 const getTodo = async () => {
   const response = await axios.get(`${url}/todos`, {
@@ -179,6 +180,8 @@ const getTodo = async () => {
   });
   todoList.value = response.data.data.map(todo => ({ ...todo, isEditing: false }));
 };
+
+const newTodo = ref('');
 
 const addTodo = async () => {
   try {
