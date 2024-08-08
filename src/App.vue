@@ -58,7 +58,7 @@
                 @keyup.enter="addTodo"
                 type="text"
                 class="form-control"
-                placeholder="Add a new todo"
+                placeholder="確認後按下enter"
               />
             </div>
             <ul class="list-group">
